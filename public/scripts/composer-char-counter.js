@@ -13,4 +13,9 @@ $(document).ready(function() {
             $(".counter").removeClass("counterRed");
         }
     });
+    $(".tweet").hover(function () {
+        $(this).css("border", "1px solid", "opacity", "1em");
+    }, function () {
+        $(this).css("border", "1px solid #bcbcbc");
+    });
 });

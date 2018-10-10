@@ -1,13 +1,13 @@
-h2 {
+.new-tweet h2 {
     text-decoration: underline;
 }
 .new-tweet {
     border-radius: 4px;
-  background-color: #eaeaea;
-  padding: 1em 1em 0 1em;
-  margin: 2em;
-  display: block;
-  border: 1px solid #bcbcbc;
+    background-color: #eaeaea;
+    padding: 1em 1em 0 1em;
+    margin: 2em;
+    display: block;
+    border: 1px solid #bcbcbc;
 }
 
 .new-tweet textarea {
@@ -24,4 +24,36 @@ h2 {
 .new-tweet .counterRed {
     float: right;
     color:red;
+}
+
+.tweet {
+    padding-left:1em 2em;
+    border: 1px solid #eaeaea;
+    margin: 2em;
+    display: block;
+    border: 1px solid #bcbcbc;
+}
+
+header {
+    padding: 1em 1em 0;
+    background-color: #eaeaea;
+    
+}
+
+footer {
+    border: 1px solid #eaeaea;
+    font-size: small;
+    padding: 0 1em;
+    overflow: auto;
+}
+
+header h1 {
+    font-size: 25px;
+    margin: auto;
+    padding: 0px 0 15px 0px;    
+}
+
+ .input {
+    padding: 0 1em;
+    color: darkslategray;
 }
