@@ -16,3 +16,8 @@ This repository is the starter code for the project: Students will fork and clon
 - MongoDB
 - Express
 - Node 5.10.x or above
+
+### Screenshots
+https://github.com/tbold5/tweeter/blob/master/docs/Fullview.png
+https://github.com/tbold5/tweeter/blob/master/docs/Textarea.png
+https://github.com/tbold5/tweeter/blob/master/docs/Tweetarea.png
