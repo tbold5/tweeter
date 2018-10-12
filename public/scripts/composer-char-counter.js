@@ -1,5 +1,4 @@
-$(document).ready(function() {
-    $(".textarea").keyup(function() {
+$(".textarea").on("input", function() {
        // "this" becomes whatever we are calling on top
        // using val() to show the value of what we putting in the keyboard
        // using length to convert words (strings) into counts 
@@ -18,4 +17,4 @@ $(document).ready(function() {
     }, function () {
         $(this).css("border", "1px solid #bcbcbc");
     });
-});
+

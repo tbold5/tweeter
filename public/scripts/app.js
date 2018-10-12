@@ -1,37 +1,77 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-const tweetData = {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
+$(() => {
+    
+    $(".compose").click(function() {
+        $(".new-tweet").slideToggle("slow", function(){
+            $(".textarea").focus()
+        });
+    });
+     $(".textarea").on("input", function() {
+        $("label").slideUp()
+    })
+    $("form").on("submit", function(event) {
+        event.preventDefault();
+        if ($(".counter").text() < 0) {
+            $("label").slideDown();
+            $("label").text("Tweet too long")
+            return;
+        } else if ($(".counter").text() === "140") {
+            $("label").slideDown();
+            $("label").text("Text area is empty, please hum!")
+            return;
+        } else {  
+            $("label").slideUp();
+            $.ajax({
+                method: 'POST',
+                url: '/tweets',
+                data: $(this).serialize()
+        }).then((res) => {
+            $(".textarea").val('').trigger("input")
+            console.log('success!',res) 
+            getAllTweets();
+        });
+    }
+});
+
+
+    function getAllTweets() {
+        return $.ajax({
+            method: "GET",
+            url: '/tweets',
+            success: function(tweets) {
+                renderTweets(tweets);
+            }
+        });
+    }
+       
+  getAllTweets();
+        
+    function renderTweets(tweets) {
+    let newTweets = tweets.reverse();
+    $("#tweet-container").empty();
+        newTweets.forEach(function(tweet) {    
+            $('#tweet-container').append(createTweetElement(tweet));
+        })
+    }
+    // loops through tweets
+      // calls createTweetElement for each tweet
+      // takes return value and appends it to the tweets container
+  
+  
+  function createTweetElement(tweet) {
+    // console.log('tweet', tweet);
+    let $image = $("<img>").addClass("avatar").attr("src", tweet.user.avatars.small);
+    let $h1 = $("<h1>").text(tweet.user.name);
+    let $h2 = $("<h2>").text(tweet.user.handle);
+    let $header = $("<header>").append($image).append($h1).append($h2);
+    let $p = $("<p>").text(tweet.content.text).addClass("input");
+    let $footerp = $("<p>").text(moment(tweet.created_at).fromNow());
+    let $footer = $("<footer>").append($footerp);
+    let $section = $("<section>").addClass("tweet").append($header).append($p).append($footer);
+    let $article = $('<article>').addClass('tweeterarticle').append($section);
+    let $tweet = $article;
+
+    
+    return $tweet;
   }
-  
-  var $tweet = createTweetElement(tweetData);
-  
-  // Test / driver code (temporary)
-  console.log($tweet); // to see what it looks like
-  $('#tweets-container').append($tweet);
-
-
-
-
-
-
-
-
-
-
+ 
 });
