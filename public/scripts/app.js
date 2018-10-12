@@ -1,6 +1,13 @@
 $(() => {
-    
-    $(".compose").click(function() {
+    $(".textarea").mouseover("input", function() {
+        $(".tweet").hover(function () {
+            $(this).css("border", "1px solid", "opacity", "1em");
+        }, function () {
+            $(this).css("border", "1px solid #bcbcbc");
+        });
+    });
+
+    $("#compose").click(function() {
         $(".new-tweet").slideToggle("slow", function(){
             $(".textarea").focus()
         });
@@ -11,7 +18,7 @@ $(() => {
     $("form").on("submit", function(event) {
         event.preventDefault();
         if ($(".counter").text() < 0) {
-            $("label").slideDown();
+            $("label").slideDown(); 
             $("label").text("Tweet too long")
             return;
         } else if ($(".counter").text() === "140") {
@@ -29,7 +36,7 @@ $(() => {
             console.log('success!',res) 
             getAllTweets();
         });
-    }
+    };
 });
 
 
@@ -41,7 +48,7 @@ $(() => {
                 renderTweets(tweets);
             }
         });
-    }
+    };
        
   getAllTweets();
         
@@ -50,15 +57,9 @@ $(() => {
     $("#tweet-container").empty();
         newTweets.forEach(function(tweet) {    
             $('#tweet-container').append(createTweetElement(tweet));
-        })
-    }
-    // loops through tweets
-      // calls createTweetElement for each tweet
-      // takes return value and appends it to the tweets container
-  
-  
+        });
+    };
   function createTweetElement(tweet) {
-    // console.log('tweet', tweet);
     let $image = $("<img>").addClass("avatar").attr("src", tweet.user.avatars.small);
     let $h1 = $("<h1>").text(tweet.user.name);
     let $h2 = $("<h2>").text(tweet.user.handle);
@@ -69,9 +70,7 @@ $(() => {
     let $section = $("<section>").addClass("tweet").append($header).append($p).append($footer);
     let $article = $('<article>').addClass('tweeterarticle').append($section);
     let $tweet = $article;
-
-    
     return $tweet;
-  }
+    }; 
  
 });
